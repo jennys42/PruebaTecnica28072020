@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form  id="form">   
+            <p:growl id="growl" showDetail="true" sticky="false" />  
+            <div align="center">
+                <p:outputLabel value="Personas" ></p:outputLabel>
+                <br/>
+                 <div class="col-md-12">
+                    <p:outputLabel value="Nombres" for="ipnombres" ></p:outputLabel>
+                    <p:inputText id="ipnombres" value="#{personaBean.persona.nombres}" ></p:inputText>
+                </div>
+                <div class="col-md-12">
+                    <p:outputLabel value="Apellidos" for="ipapellidos" ></p:outputLabel>
+                    <p:inputText id="ipapellidos" value="#{personaBean.persona.apellidos}" ></p:inputText>
+                </div>                
+                <div class="col-md-12">
+                    <p:outputLabel value="Tipo de documento" for="ipnumerodocumento" ></p:outputLabel>
+                     <p:calendar id="calendar" value="#{personaBean.persona.tipoDocumento}" />
+                </div>
+                <div class="col-md-12">
+                    <p:outputLabel value="Número de documento" for="ipnumerodocumento" ></p:outputLabel>
+                    <p:inputText id="ipnumerodocumento" value="#{personaBean.persona.numeroDocumento}" ></p:inputText>
+                </div>
+               
+                <br/><br/>
+                <p:commandButton value="Guardar Persona" action="#{personaBean.guardarPersona()}" update=":form">                
+                </p:commandButton>
+                <br/><br/>
+            </div>
+            <p:outputLabel value="Listado de personas" ></p:outputLabel>
+            <p:dataTable id="tablePersonas" value="#{personaBean.personas}" var="per">
+               
+                <p:column>
+                    <h:outputText value="#{per.nombres}"></h:outputText>                     
+                </p:column>
+                <p:column>
+                    <h:outputText value="#{per.apellidos}"></h:outputText> 
+                </p:column> 
+                 <p:column>
+                    <h:outputText value="#{per.numeroDocumento}"></h:outputText> 
+                </p:column>
+                <p:column>
+                    <h:outputText value="#{per.tipoDocumento.nombre}"></h:outputText> 
+                </p:column>
+                <p:column>
+                    <p:commandButton actionListener="#{personaBean.editarPersona(per)}" value="Editar" update=":form">
+                    </p:commandButton>
+                </p:column>  
+                <p:column>
+                    <p:commandButton actionListener="#{personaBean.eliminarPersona(per)}" value="Eliminar" update=":form">
+
+                    </p:commandButton>
+
+                </p:column>               
+
+            </p:dataTable>   
+        </h:form>
+    </h:body>
+
+</html>
+
+
