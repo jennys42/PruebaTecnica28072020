@@ -13,49 +13,61 @@
             <div align="center">
                 <p:outputLabel value="Personas" ></p:outputLabel>
                 <br/>
-                 <div class="col-md-12">
+                <div class="col-md-12">
                     <p:outputLabel value="Nombres" for="ipnombres" ></p:outputLabel>
-                    <p:inputText id="ipnombres" value="#{personaBean.persona.nombres}" ></p:inputText>
+                    <p:inputText id="ipnombres" value="#{personaBean.persona.nombres}" required="true"></p:inputText>
                 </div>
                 <div class="col-md-12">
                     <p:outputLabel value="Apellidos" for="ipapellidos" ></p:outputLabel>
-                    <p:inputText id="ipapellidos" value="#{personaBean.persona.apellidos}" ></p:inputText>
+                    <p:inputText id="ipapellidos" value="#{personaBean.persona.apellidos}" required="true"></p:inputText>
                 </div>                
                 <div class="col-md-12">
                     <p:outputLabel value="Tipo de documento" for="ipnumerodocumento" ></p:outputLabel>
-                     <p:calendar id="calendar" value="#{personaBean.persona.tipoDocumento}" />
+                    <p:selectOneMenu id="advanced" value="#{personaBean.idTipoDoc}" required="true">
+                        <f:selectItems value="#{personaBean.tipoDocumetoList}" var="tipoDocs" itemLabel="#{tipoDocs.nombre}" itemValue="#{tipoDocs.id}" />
+                    </p:selectOneMenu>
                 </div>
                 <div class="col-md-12">
                     <p:outputLabel value="Número de documento" for="ipnumerodocumento" ></p:outputLabel>
-                    <p:inputText id="ipnumerodocumento" value="#{personaBean.persona.numeroDocumento}" ></p:inputText>
+                    <p:inputText id="ipnumerodocumento" value="#{personaBean.persona.numeroDocumento}" required="true"></p:inputText>
                 </div>
-               
+
+                <div class="col-md-12">
+                    <p:outputLabel value="Fecha de nacimiento" for="ipfechanacimiento" ></p:outputLabel>
+                    <p:calendar id="ipfechanacimiento" value="#{personaBean.persona.fechaDeNacimiento}" required="true" />
+                </div>
+
                 <br/><br/>
                 <p:commandButton value="Guardar Persona" action="#{personaBean.guardarPersona()}" update=":form">                
                 </p:commandButton>
                 <br/><br/>
             </div>
             <p:outputLabel value="Listado de personas" ></p:outputLabel>
-            <p:dataTable id="tablePersonas" value="#{personaBean.personas}" var="per">
-               
-                <p:column>
+            <p:dataTable id="tablePersonas" value="#{personaBean.personasList}" var="per">
+
+                <p:column headerText="Nombres">
                     <h:outputText value="#{per.nombres}"></h:outputText>                     
                 </p:column>
-                <p:column>
+                <p:column headerText="Apellidos">
                     <h:outputText value="#{per.apellidos}"></h:outputText> 
                 </p:column> 
-                 <p:column>
-                    <h:outputText value="#{per.numeroDocumento}"></h:outputText> 
-                </p:column>
-                <p:column>
+                <p:column headerText="Tipo Documento">
                     <h:outputText value="#{per.tipoDocumento.nombre}"></h:outputText> 
                 </p:column>
-                <p:column>
-                    <p:commandButton actionListener="#{personaBean.editarPersona(per)}" value="Editar" update=":form">
+                <p:column headerText="Numero documento">
+                    <h:outputText value="#{per.numeroDocumento}"></h:outputText> 
+                </p:column>
+                <p:column headerText="FecgaNacimiento">
+                    <h:outputText value="#{per.fechaDeNacimiento}">
+                        <f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
+                    </h:outputText> 
+                </p:column>
+                <p:column headerText="Editar">
+                    <p:commandButton actionListener="#{personaBean.editarPersona(per)}" value="Editar" update=":form" process="@this">
                     </p:commandButton>
                 </p:column>  
-                <p:column>
-                    <p:commandButton actionListener="#{personaBean.eliminarPersona(per)}" value="Eliminar" update=":form">
+                <p:column headerText="Eliminar">
+                    <p:commandButton actionListener="#{personaBean.eliminarPersona(per)}" value="Eliminar" update=":form" process="@this">
 
                     </p:commandButton>
 

@@ -7,7 +7,7 @@
     <packaging>war</packaging>
     <name>PruebaTecnica20200728</name>
     
-    <properties>
+      <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
@@ -18,29 +18,19 @@
     
     <dependencies>
         <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-api</artifactId>
+            <version>8.0</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
             <groupId>org.primefaces</groupId>
             <artifactId>primefaces</artifactId>
             <version>8.0</version>
         </dependency>
-<!--        <dependency>
-            <groupId>con.jengal</groupId>
-            <artifactId>PruebaTecnicaEJB</artifactId>
-            <version>1.0</version>
-        </dependency>-->
-        <dependency>
-            <groupId>con.jengal</groupId>
-            <artifactId>PruebaTecnicaEJB</artifactId>
-            <version>1.0</version>
-        </dependency>
-        <dependency>
-            <groupId>javax</groupId>
-            <artifactId>javaee-api</artifactId>
-            <version>${jakartaee}</version>
-            <scope>provided</scope>
-        </dependency>
     </dependencies>
     
-     <build>
+    <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
